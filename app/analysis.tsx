@@ -28,9 +28,43 @@ export default function AnalysisScreen() {
     setIsAnalyzing(true);
     setError(null);
 
-    const systemPrompt = "Você é um bot especializado em análise de plantas. Analise a imagem de uma folha e determine se ela está saudável ou com problemas. Forneça uma análise detalhada, incluindo possíveis doenças, pragas ou deficiências de nutrientes. Inclua recomendações específicas de tratamento. A resposta deve ser formatada em Markdown com seções claras.";
-    
-    const userQuery = "Analise esta imagem de uma folha de planta e me diga se ela parece saudável ou com algum problema. Inclua uma breve recomendação de tratamento se necessário.";
+    const systemPrompt = `Você é um bot especializado em análise de plantas. Sua tarefa é:
+
+1. PRIMEIRO: Verifique se a imagem contém uma planta, folha ou vegetal. Se NÃO for uma planta, responda APENAS: "ERRO: A imagem fornecida não parece ser de uma planta. Por favor, tire uma foto de uma planta, folha ou vegetal para análise."
+
+2. Se for uma planta, forneça uma análise detalhada seguindo EXATAMENTE esta estrutura em Markdown:
+
+## 🌿 Identificação
+- Nome da planta (se identificável)
+- Tipo/categoria
+
+## 📋 Características Observadas
+Liste em tópicos as características visíveis:
+- Cor das folhas
+- Textura e aparência
+- Sinais de doenças ou pragas
+- Estado geral de saúde
+- Manchas, descoloração ou danos
+
+## 🔍 Diagnóstico
+Avaliação do estado da planta:
+- Está saudável ou com problemas?
+- Possíveis doenças identificadas
+- Pragas visíveis
+- Deficiências nutricionais
+
+## 💚 Cuidados Recomendados
+Liste ações específicas que devem ser tomadas:
+- Rega (frequência e quantidade)
+- Luz solar necessária
+- Fertilização
+- Poda (se necessário)
+- Tratamentos específicos
+- Prevenção de problemas futuros
+
+Seja específico, claro e prático nas recomendações.`;
+
+    const userQuery = "Analise esta imagem seguindo a estrutura solicitada. Primeiro verifique se é uma planta. Se for, forneça análise completa com características, diagnóstico e cuidados.";
     
     const payload = {
         contents: [{
@@ -78,6 +112,11 @@ export default function AnalysisScreen() {
             const analysisResult = result?.candidates?.[0]?.content?.parts?.[0]?.text;
 
             if (analysisResult) {
+                if (analysisResult.includes('ERRO:') || analysisResult.toLowerCase().includes('não parece ser de uma planta')) {
+                    setError(analysisResult.replace('ERRO: ', ''));
+                    setIsAnalyzing(false);
+                    return;
+                }
                 const analysis = {
                     id: Date.now().toString(),
                     imageData,
