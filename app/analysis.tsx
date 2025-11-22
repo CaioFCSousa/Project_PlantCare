@@ -99,7 +99,7 @@ Seja específico, claro e prático nas recomendações.`;
 
             if (!response.ok) {
                 if (response.status === 429) {
-                    // Exponential backoff
+                  
                     const delay = Math.pow(2, retryCount) * 1000;
                     await new Promise(res => setTimeout(res, delay));
                     retryCount++;
