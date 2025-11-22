@@ -18,7 +18,7 @@ export default function AnalysisScreen() {
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Inicia a análise automaticamente quando a tela é carregada
+    
     useEffect(() => {
         if (imageData) {
             analyzeImage();
@@ -82,7 +82,7 @@ Liste de 3 a 5 ações simples e práticas (NÃO MAIS QUE 5):
 
         const userQuery = "Analise esta imagem seguindo a estrutura solicitada. Primeiro verifique se é uma planta. Se for, forneça análise completa com características, diagnóstico e cuidados.";
         
-        // --- CORREÇÃO FINAL: Campo 'config' (generationConfig) REMOVIDO ---
+        
         const payload = {
             contents: [{
                 parts: [
@@ -95,13 +95,11 @@ Liste de 3 a 5 ações simples e práticas (NÃO MAIS QUE 5):
                     }
                 ]
             }],
-            // systemInstruction é um campo de nível superior, e deve permanecer
             systemInstruction: { 
                 parts: [{ text: systemPrompt }]
             },
-            // O campo 'config' ou 'generationConfig' foi removido para evitar o erro 400.
+            
         };
-        // ----------------------------------------------------------------------
         
         const apiKey = "AIzaSyB4b8RX2tnTdpreGS77fCbi_zLkzMDboXg";
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;

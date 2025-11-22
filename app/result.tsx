@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, router } from 'expo-router';
-// 🚨 NOVOS ÍCONES IMPORTADOS
+
 import { 
   ArrowLeft, Heart, Share, RotateCcw,
   CheckCircle, AlertTriangle, ClipboardList, Leaf, AlertCircle 
@@ -19,7 +19,7 @@ import Markdown from 'react-native-markdown-display';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Sharing from 'expo-sharing';
 
-// --- ESTILOS DO MARKDOWN PERSONALIZADOS (Mantidos) ---
+
 const customMarkdownStyles = {
   body: {
     fontSize: 16,
@@ -376,7 +376,7 @@ const styles = StyleSheet.create({
 
   cardbox:{
     backgroundColor:'#F2FDF5',
-    padding: 16, // Reduzi para 16px para melhor espaçamento interno
+    padding: 16,
     borderRadius:15,
     borderColor: '#5dbe7849',
     borderWidth: 2
@@ -423,35 +423,34 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   cardIcon: {
-    marginRight: 8, // Espaçamento entre o ícone e o texto
+    marginRight: 8,
   },
-  cardTitle: { // Verde para Análise Concluída
+  cardTitle: { 
     fontSize: 30,
     fontWeight: '700',
     color: '#22c55e', 
   },
-  cardTitleOrange: { // Laranja para Problema
-    fontSize: 18,
+  cardTitleOrange: { 
     fontWeight: '700',
     color: '#f97316', 
   },
-  cardTitleBlue: { // Azul para Características
+  cardTitleBlue: {
     fontSize: 18,
     fontWeight: '700',
     color: '#3b82f6', 
   },
-  cardTitleGreen: { // Branco no cartão verde para Cuidados
+  cardTitleGreen: { 
     fontSize: 18,
     fontWeight: '700',
     color: '#ffffff', 
   },
-  cardTitleError: { // Vermelho para Erro
+  cardTitleError: { 
     fontSize: 18,
     fontWeight: '700',
     color: '#ef4444', 
   },
 
-  // --- Botão inferior fixo ---
+
   bottomActions: {
     paddingHorizontal: 24,
     paddingVertical: 16,
@@ -478,7 +477,6 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
 
-  // --- Estilos de Erro Genéricos (mantidos) ---
   errorContainer: {
     flex: 1,
     justifyContent: 'center',

@@ -451,11 +451,11 @@ const styles = StyleSheet.create({
   },
   tipRow: {
     flexDirection: 'row',
-    alignItems: 'flex-start', // Alinha o ícone e o texto no topo
+    alignItems: 'flex-start', 
     gap: 12,
   },
   tipText: {
-    flex: 1, // Permite que o texto ocupe o restante do espaço
+    flex: 1, 
     fontSize: 14,
     color: '#065f46',
     lineHeight: 20,
