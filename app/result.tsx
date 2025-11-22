@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { useState, useEffect } from 'react';
+=======
+import { useState } from 'react';
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
 import {
   View,
   Text,
@@ -10,15 +14,20 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, router } from 'expo-router';
+<<<<<<< HEAD
 
 import { 
   ArrowLeft, Heart, Share, RotateCcw,
   CheckCircle, AlertTriangle, ClipboardList, Leaf, AlertCircle 
 } from 'lucide-react-native'; 
+=======
+import { ArrowLeft, Heart, Share, RotateCcw } from 'lucide-react-native';
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
 import Markdown from 'react-native-markdown-display';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Sharing from 'expo-sharing';
 
+<<<<<<< HEAD
 
 const customMarkdownStyles = {
   body: {
@@ -67,6 +76,8 @@ const customMarkdownStyles = {
   },
 };
 
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
 export default function ResultScreen() {
   const { imageData, result, timestamp } = useLocalSearchParams<{
     imageData: string;
@@ -76,6 +87,7 @@ export default function ResultScreen() {
   
   const [isFavorite, setIsFavorite] = useState(false);
 
+<<<<<<< HEAD
   useEffect(() => {
       const loadFavoriteStatus = async () => {
           try {
@@ -94,6 +106,8 @@ export default function ResultScreen() {
       loadFavoriteStatus();
   }, [timestamp]);
 
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   const toggleFavorite = async () => {
     try {
       const stored = await AsyncStorage.getItem('plant_analyses');
@@ -115,22 +129,34 @@ export default function ResultScreen() {
   const shareResult = async () => {
     try {
       const shareContent = `Análise de Planta - PlantAI\n\n${result}`;
+<<<<<<< HEAD
       // Usando Buffer para btoa/atob que é mais seguro em React Native (ou usando a polyfill)
       await Sharing.shareAsync('data:text/plain;base64,' + Buffer.from(shareContent).toString('base64'), {
           mimeType: 'text/plain',
           dialogTitle: 'Compartilhar Análise PlantAI',
       });
+=======
+      await Sharing.shareAsync('data:text/plain;base64,' + btoa(shareContent));
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
     } catch (error) {
       Alert.alert('Erro', 'Não foi possível compartilhar a análise.');
     }
   };
 
   const newAnalysis = () => {
+<<<<<<< HEAD
     router.replace('/(tabs)'); 
   };
 
   const formatDate = (ts: string) => {
     return new Date(parseInt(ts)).toLocaleDateString('pt-BR', {
+=======
+    router.push('/(tabs)');
+  };
+
+  const formatDate = (timestamp: string) => {
+    return new Date(parseInt(timestamp)).toLocaleDateString('pt-BR', {
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
       day: '2-digit',
       month: '2-digit',
       year: 'numeric',
@@ -139,6 +165,79 @@ export default function ResultScreen() {
     });
   };
 
+<<<<<<< HEAD
+=======
+  const markdownStyles = {
+    body: {
+      fontSize: 16,
+      lineHeight: 24,
+      color: '#374151',
+    },
+    heading1: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: '#1f2937',
+      marginBottom: 16,
+      marginTop: 24,
+    },
+    heading2: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: '#1f2937',
+      marginBottom: 12,
+      marginTop: 20,
+    },
+    heading3: {
+      fontSize: 18,
+      fontWeight: '600',
+      color: '#374151',
+      marginBottom: 8,
+      marginTop: 16,
+    },
+    paragraph: {
+      marginBottom: 12,
+      lineHeight: 24,
+    },
+    list_item: {
+      marginBottom: 8,
+    },
+    bullet_list: {
+      marginBottom: 16,
+    },
+    ordered_list: {
+      marginBottom: 16,
+    },
+    strong: {
+      fontWeight: 'bold',
+      color: '#1f2937',
+    },
+    em: {
+      fontStyle: 'italic',
+    },
+    code_inline: {
+      backgroundColor: '#f3f4f6',
+      paddingHorizontal: 4,
+      paddingVertical: 2,
+      borderRadius: 4,
+      fontSize: 14,
+      fontFamily: 'monospace',
+    },
+    blockquote: {
+      backgroundColor: '#f0fdf4',
+      borderLeftWidth: 4,
+      borderLeftColor: '#22c55e',
+      paddingLeft: 16,
+      paddingVertical: 12,
+      marginVertical: 16,
+    },
+    hr: {
+      backgroundColor: '#e5e7eb',
+      height: 1,
+      marginVertical: 24,
+    },
+  };
+
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   if (!imageData || !result) {
     return (
       <SafeAreaView style={styles.container}>
@@ -152,6 +251,7 @@ export default function ResultScreen() {
     );
   }
 
+<<<<<<< HEAD
   // Determinar se o resultado é um erro com base no conteúdo
   const isErrorResult = result.includes('## 🚨 ERRO DE IMAGEM');
 
@@ -178,6 +278,8 @@ export default function ResultScreen() {
   const erroContent = getSectionContent(/## 🚨 ERRO DE IMAGEM/);
 
 
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -200,7 +302,10 @@ export default function ResultScreen() {
       </View>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+<<<<<<< HEAD
         {/* Seção da Imagem e Data */}
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
         <View style={styles.imageSection}>
           <Image source={{ uri: `data:image/jpeg;base64,${imageData}` }} style={styles.resultImage} />
           <Text style={styles.analysisDate}>
@@ -208,6 +313,7 @@ export default function ResultScreen() {
           </Text>
         </View>
 
+<<<<<<< HEAD
         {isErrorResult ? (
           // Bloco de erro especial se for um resultado de erro da IA
           <View style={styles.cardError}>
@@ -289,12 +395,23 @@ export default function ResultScreen() {
         
         {/* Espaço extra no final da ScrollView para o botão fixo */}
         <View style={{ height: 100 }} /> 
+=======
+        <View style={styles.resultSection}>
+          <Markdown style={markdownStyles}>
+            {result}
+          </Markdown>
+        </View>
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
       </ScrollView>
 
       <View style={styles.bottomActions}>
         <TouchableOpacity style={styles.newAnalysisButton} onPress={newAnalysis}>
           <RotateCcw size={20} color="#ffffff" />
+<<<<<<< HEAD
           <Text style={styles.newAnalysisButtonText}>Fazer Nova Análise</Text>
+=======
+          <Text style={styles.newAnalysisButtonText}>Nova Análise</Text>
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -304,7 +421,11 @@ export default function ResultScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+<<<<<<< HEAD
     backgroundColor: '#f8fafc', 
+=======
+    backgroundColor: '#f8fafc',
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   },
   header: {
     flexDirection: 'row',
@@ -332,6 +453,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+<<<<<<< HEAD
     paddingHorizontal: 16, 
   },
   imageSection: {
@@ -341,20 +463,33 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#e5e7eb',
     marginBottom: 16,
+=======
+  },
+  imageSection: {
+    alignItems: 'center',
+    padding: 24,
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e5e7eb',
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   },
   resultImage: {
     width: 200,
     height: 200,
     borderRadius: 16,
     marginBottom: 12,
+<<<<<<< HEAD
     borderColor: '#e0e0e0',
     borderWidth: 1,
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   },
   analysisDate: {
     fontSize: 14,
     color: '#6b7280',
     fontWeight: '500',
   },
+<<<<<<< HEAD
   
   // --- NOVOS ESTILOS PARA CARTÕES E TÍTULOS ---
   mainTitleContainer: {
@@ -451,16 +586,32 @@ const styles = StyleSheet.create({
   },
 
 
+=======
+  resultSection: {
+    backgroundColor: '#ffffff',
+    padding: 24,
+    margin: 16,
+    borderRadius: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   bottomActions: {
     paddingHorizontal: 24,
     paddingVertical: 16,
     backgroundColor: '#ffffff',
     borderTopWidth: 1,
     borderTopColor: '#e5e7eb',
+<<<<<<< HEAD
     position: 'absolute', 
     bottom: 0,
     left: 0,
     right: 0,
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   },
   newAnalysisButton: {
     flexDirection: 'row',
@@ -468,7 +619,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 16,
     borderRadius: 12,
+<<<<<<< HEAD
     backgroundColor: '#22c55e', 
+=======
+    backgroundColor: '#22c55e',
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
     gap: 8,
   },
   newAnalysisButtonText: {
@@ -476,7 +631,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#ffffff',
   },
+<<<<<<< HEAD
 
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   errorContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -500,4 +658,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#ffffff',
   },
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e

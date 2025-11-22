@@ -4,7 +4,11 @@
     "slug": "plantcare",
     "version": "1.0.0",
     "orientation": "portrait",
+<<<<<<< HEAD
     "icon": "./assets/images/Gemini_Generated_Image_s1uskfs1uskfs1us-removebg-preview.png",
+=======
+    "icon": "./assets/images/icon.png",
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
     "scheme": "plantcare",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,

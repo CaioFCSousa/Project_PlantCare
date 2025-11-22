@@ -11,19 +11,26 @@ import {
   Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+<<<<<<< HEAD
 // Ajuste de ícones: importando os novos ícones para a seção Dicas
 import { 
   Camera, Image as ImageIcon, Sparkles, Leaf, ChevronRight, Clock,
   Sun, Target, Layers // 🚨 NOVOS ÍCONES PARA DICAS
 } from 'lucide-react-native'; 
+=======
+import { Camera, Image as ImageIcon, Sparkles, Leaf } from 'lucide-react-native';
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
 import * as ImagePicker from 'expo-image-picker';
 import { router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const { width } = Dimensions.get('window');
+<<<<<<< HEAD
 const ICON_PRIMARY_COLOR = '#16a34a'; // Cor verde primária
 const ICON_STROKE_WIDTH = 2.5; // Nova espessura da linha
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
 
 interface Analysis {
   id: string;
@@ -33,8 +40,11 @@ interface Analysis {
   isFavorite?: boolean;
 }
 
+<<<<<<< HEAD
 // ... (Restante do componente HomeScreen, funções e estados mantidos) ...
 
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
 export default function HomeScreen() {
   const [recentAnalyses, setRecentAnalyses] = useState<Analysis[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -47,8 +57,12 @@ export default function HomeScreen() {
     try {
       const stored = await AsyncStorage.getItem('plant_analyses');
       if (stored) {
+<<<<<<< HEAD
         const analyses: Analysis[] = JSON.parse(stored);
         analyses.sort((a, b) => b.timestamp - a.timestamp); 
+=======
+        const analyses = JSON.parse(stored);
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
         setRecentAnalyses(analyses.slice(0, 3));
       }
     } catch (error) {
@@ -71,6 +85,7 @@ export default function HomeScreen() {
     return true;
   };
 
+<<<<<<< HEAD
   const processImageSelection = (result: ImagePicker.ImagePickerResult) => {
     if (!result.canceled && result.assets && result.assets.length > 0 && result.assets[0].base64) {
       router.push({
@@ -80,20 +95,36 @@ export default function HomeScreen() {
     }
   };
 
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   const takePhoto = async () => {
     const hasPermission = await requestPermissions();
     if (!hasPermission) return;
 
     setIsLoading(true);
     const result = await ImagePicker.launchCameraAsync({
+<<<<<<< HEAD
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
+=======
+      mediaTypes: ImagePicker.MediaTypeOptions.Images, // Corrected syntax
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
       allowsEditing: true,
       aspect: [1, 1],
       quality: 0.8,
       base64: true,
     });
     setIsLoading(false);
+<<<<<<< HEAD
     processImageSelection(result);
+=======
+
+    if (!result.canceled && result.assets[0]) {
+      router.push({
+        pathname: '/analysis',
+        params: { imageData: result.assets[0].base64 },
+      });
+    }
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   };
 
   const pickImage = async () => {
@@ -102,13 +133,18 @@ export default function HomeScreen() {
 
     setIsLoading(true);
     const result = await ImagePicker.launchImageLibraryAsync({
+<<<<<<< HEAD
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
+=======
+      mediaTypes: ImagePicker.MediaTypeOptions.Images, // Corrected syntax
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
       allowsEditing: true,
       aspect: [1, 1],
       quality: 0.8,
       base64: true,
     });
     setIsLoading(false);
+<<<<<<< HEAD
     processImageSelection(result);
   };
 
@@ -122,6 +158,15 @@ export default function HomeScreen() {
         { text: 'Cancelar', style: 'cancel' },
       ]
     );
+=======
+
+    if (!result.canceled && result.assets[0]) {
+      router.push({
+        pathname: '/analysis',
+        params: { imageData: result.assets[0].base64 },
+      });
+    }
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   };
 
   const formatDate = (timestamp: number) => {
@@ -133,6 +178,7 @@ export default function HomeScreen() {
     });
   };
 
+<<<<<<< HEAD
   const getProblemFromAnalysis = (result: string): string => {
     const match = result.match(/Principal Problema Identificado:\s*\[(.*?)\]/i);
     if (match && match[1]) {
@@ -144,41 +190,76 @@ export default function HomeScreen() {
     return result.includes('## 🚨 ERRO DE IMAGEM') ? 'Erro de Imagem' : 'Análise da Planta';
   };
 
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <View style={styles.headerContent}>
+<<<<<<< HEAD
             {/* Ícone principal maior e mais espesso */}
             <Leaf size={36} color={ICON_PRIMARY_COLOR} strokeWidth={ICON_STROKE_WIDTH} /> 
             <Text style={styles.headerTitle}>PlantAI</Text>
           </View>
           <Text style={styles.headerSubtitle}>
             A inteligência artificial que cuida das suas plantas.
+=======
+            <Leaf size={32} color="#22c55e" />
+            <Text style={styles.headerTitle}>PlantAI</Text>
+          </View>
+          <Text style={styles.headerSubtitle}>
+            Analise a saúde das suas plantas com inteligência artificial
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
           </Text>
         </View>
 
         <View style={styles.actionSection}>
           <LinearGradient
+<<<<<<< HEAD
             colors={['#16a34a', '#059669']}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
+=======
+            colors={['#22c55e', '#16a34a']}
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
             style={styles.mainButton}
           >
             <TouchableOpacity
               style={styles.mainButtonContent}
+<<<<<<< HEAD
               onPress={handleMainButtonPress}
+=======
+              onPress={() => {
+                Alert.alert(
+                  'Escolha uma opção',
+                  'Como você gostaria de adicionar a imagem?',
+                  [
+                    { text: 'Câmera', onPress: takePhoto },
+                    { text: 'Galeria', onPress: pickImage },
+                    { text: 'Cancelar', style: 'cancel' },
+                  ]
+                );
+              }}
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
               disabled={isLoading}
             >
               {isLoading ? (
                 <ActivityIndicator color="#ffffff" size="large" />
               ) : (
                 <>
+<<<<<<< HEAD
                   {/* Ícone principal do botão maior e mais espesso */}
                   <Sparkles size={40} color="#ffffff" strokeWidth={ICON_STROKE_WIDTH} /> 
                   <Text style={styles.mainButtonText}>Analisar Planta Agora</Text>
                   <Text style={styles.mainButtonSubtext}>
                     Diagnóstico instantâneo e recomendações de cuidados
+=======
+                  <Sparkles size={32} color="#ffffff" />
+                  <Text style={styles.mainButtonText}>Analisar Planta</Text>
+                  <Text style={styles.mainButtonSubtext}>
+                    Tire uma foto ou selecione da galeria
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
                   </Text>
                 </>
               )}
@@ -188,6 +269,7 @@ export default function HomeScreen() {
 
         <View style={styles.quickActions}>
           <TouchableOpacity style={styles.quickActionButton} onPress={takePhoto}>
+<<<<<<< HEAD
             {/* Ícones de ação mais espessos */}
             <Camera size={28} color={ICON_PRIMARY_COLOR} strokeWidth={ICON_STROKE_WIDTH} />
             <Text style={styles.quickActionText}>Tirar Foto</Text>
@@ -196,13 +278,25 @@ export default function HomeScreen() {
             {/* Ícones de ação mais espessos */}
             <ImageIcon size={28} color={ICON_PRIMARY_COLOR} strokeWidth={ICON_STROKE_WIDTH} />
             <Text style={styles.quickActionText}>Da Galeria</Text>
+=======
+            <Camera size={24} color="#22c55e" />
+            <Text style={styles.quickActionText}>Câmera</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.quickActionButton} onPress={pickImage}>
+            <ImageIcon size={24} color="#22c55e" />
+            <Text style={styles.quickActionText}>Galeria</Text>
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
           </TouchableOpacity>
         </View>
 
         {recentAnalyses.length > 0 && (
           <View style={styles.recentSection}>
+<<<<<<< HEAD
             <Text style={styles.sectionTitle}>Últimas Análises</Text>
             
+=======
+            <Text style={styles.sectionTitle}>Análises Recentes</Text>
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
             {recentAnalyses.map((analysis) => (
               <TouchableOpacity
                 key={analysis.id}
@@ -217,6 +311,7 @@ export default function HomeScreen() {
                 })}
               >
                 <View style={styles.recentItemContent}>
+<<<<<<< HEAD
                   <Image 
                     source={{ uri: `data:image/jpeg;base64,${analysis.imageData}` }} 
                     style={styles.recentItemImage} 
@@ -239,15 +334,34 @@ export default function HomeScreen() {
               </TouchableOpacity>
             ))}
             
+=======
+                  <Image source={{ uri: `data:image/jpeg;base64,${analysis.imageData}` }} style={styles.recentItemImage} />
+                  <View style={styles.recentItemText}>
+                    <Text style={styles.recentItemTitle}>
+                      Análise de {formatDate(analysis.timestamp)}
+                    </Text>
+                    <Text style={styles.recentItemSubtitle} numberOfLines={2}>
+                      {analysis.result}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            ))}
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
             <TouchableOpacity
               style={styles.viewAllButton}
               onPress={() => router.push('/history')}
             >
+<<<<<<< HEAD
               <Text style={styles.viewAllText}>Ver Histórico Completo</Text>
+=======
+              <Text style={styles.viewAllText}>Ver Todas as Análises</Text>
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
             </TouchableOpacity>
           </View>
         )}
 
+<<<<<<< HEAD
         {/* 🚀 SEÇÃO DE DICAS MELHORADA COM ÍCONES LUCIDE */}
         <View style={styles.tipsSection}>
           <Text style={styles.sectionTitle}>Dicas para Análises Precisas</Text>
@@ -282,6 +396,20 @@ export default function HomeScreen() {
         </View>
         {/* Fim da seção de Dicas */}
         
+=======
+        <View style={styles.tipsSection}>
+          <Text style={styles.sectionTitle}>Dicas para Melhores Resultados</Text>
+          <View style={styles.tipItem}>
+            <Text style={styles.tipText}>📸 Tire fotos com boa iluminação natural</Text>
+          </View>
+          <View style={styles.tipItem}>
+            <Text style={styles.tipText}>🍃 Foque em uma folha por vez</Text>
+          </View>
+          <View style={styles.tipItem}>
+            <Text style={styles.tipText}>🔍 Mantenha a folha bem enquadrada</Text>
+          </View>
+        </View>
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
       </ScrollView>
     </SafeAreaView>
   );
@@ -293,6 +421,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8fafc',
   },
   header: {
+<<<<<<< HEAD
     paddingHorizontal: 24,
     paddingTop: 24,
     paddingBottom: 16,
@@ -305,10 +434,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.05,
     shadowRadius: 5,
     elevation: 2,
+=======
+    padding: 24,
+    paddingBottom: 16,
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   },
   headerContent: {
     flexDirection: 'row',
     alignItems: 'center',
+<<<<<<< HEAD
     marginBottom: 4,
   },
   headerTitle: {
@@ -326,12 +460,31 @@ const styles = StyleSheet.create({
   actionSection: {
     paddingHorizontal: 24,
     marginBottom: 20,
+=======
+    marginBottom: 8,
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#1f2937',
+    marginLeft: 12,
+  },
+  headerSubtitle: {
+    fontSize: 16,
+    color: '#6b7280',
+    lineHeight: 24,
+  },
+  actionSection: {
+    paddingHorizontal: 24,
+    marginBottom: 24,
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   },
   mainButton: {
     borderRadius: 20,
     overflow: 'hidden',
   },
   mainButtonContent: {
+<<<<<<< HEAD
     padding: 28,
     alignItems: 'center',
     justifyContent: 'center',
@@ -343,6 +496,19 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     marginTop: 10,
     marginBottom: 6,
+=======
+    padding: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 160,
+  },
+  mainButtonText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#ffffff',
+    marginTop: 12,
+    marginBottom: 4,
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   },
   mainButtonSubtext: {
     fontSize: 14,
@@ -362,6 +528,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 16,
     alignItems: 'center',
+<<<<<<< HEAD
     borderWidth: 1,
     borderColor: '#e5e7eb',
     shadowColor: '#000',
@@ -372,6 +539,16 @@ const styles = StyleSheet.create({
   },
   quickActionText: {
     fontSize: 15,
+=======
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  quickActionText: {
+    fontSize: 14,
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
     fontWeight: '600',
     color: '#374151',
     marginTop: 8,
@@ -382,11 +559,16 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 20,
+<<<<<<< HEAD
     fontWeight: '700',
+=======
+    fontWeight: 'bold',
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
     color: '#1f2937',
     marginBottom: 16,
   },
   recentItem: {
+<<<<<<< HEAD
     flexDirection: 'row',
     backgroundColor: '#ffffff',
     borderRadius: 12,
@@ -400,16 +582,34 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 3,
+=======
+    backgroundColor: '#ffffff',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
     elevation: 2,
   },
   recentItemContent: {
     flexDirection: 'row',
+<<<<<<< HEAD
     alignItems: 'center',
     flex: 1,
   },
   recentItemImage: {
     width: 50,
     height: 50,
+=======
+    alignItems: 'flex-start',
+  },
+  recentItemImage: {
+    width: 60,
+    height: 60,
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
     borderRadius: 8,
     marginRight: 12,
   },
@@ -420,6 +620,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: '#1f2937',
+<<<<<<< HEAD
     marginBottom: 2,
   },
   recentItemSubtitleRow: {
@@ -438,12 +639,30 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '600',
     color: '#16a34a',
+=======
+    marginBottom: 4,
+  },
+  recentItemSubtitle: {
+    fontSize: 14,
+    color: '#6b7280',
+    lineHeight: 20,
+  },
+  viewAllButton: {
+    alignItems: 'center',
+    paddingVertical: 12,
+  },
+  viewAllText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#22c55e',
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   },
   tipsSection: {
     paddingHorizontal: 24,
     paddingBottom: 32,
   },
   tipItem: {
+<<<<<<< HEAD
     backgroundColor: '#e0f2f1',
     padding: 16,
     borderRadius: 12,
@@ -461,3 +680,21 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
 });
+=======
+    backgroundColor: '#ffffff',
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  tipText: {
+    fontSize: 14,
+    color: '#374151',
+    lineHeight: 20,
+  },
+});
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
