@@ -1,19 +1,40 @@
 {
   "cli": {
+<<<<<<< HEAD
+    "version": ">= 3.10.2"
+=======
     "version": ">= 8.0.0",
     "appVersionSource": "remote"
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   },
   "build": {
     "development": {
       "developmentClient": true,
+<<<<<<< HEAD
+=======
       "distribution": "internal"
     },
     "preview": {
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
       "distribution": "internal",
       "android": {
         "buildType": "apk"
       }
     },
+<<<<<<< HEAD
+    
+    "internal_testing": {
+      "android": {
+        "buildType": "apk",              
+        "resourceClass": "medium"        
+      }
+    },
+    
+    "production": {
+      "android": {
+        "buildType": "app-bundle",       
+        "resourceClass": "medium"        
+=======
     "production": {
       "android": {
         "buildType": "app-bundle"
@@ -22,10 +43,15 @@
     "apk": {
       "android": {
         "buildType": "apk"
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
       }
     }
   },
   "submit": {
     "production": {}
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e

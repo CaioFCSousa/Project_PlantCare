@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+=======
+import React, { useState, useEffect, useRef } from 'react';
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
 import {
   View,
   Text,
@@ -10,6 +14,7 @@ import {
   Animated,
   Dimensions,
   Platform,
+<<<<<<< HEAD
   PanResponder, // Adicionado para o gesto de deslize
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -18,6 +23,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import * as Sharing from 'expo-sharing';
 import { useFocusEffect } from '@react-navigation/native'; // Necessário para recarregar ao focar
+=======
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Heart, Trash2, Share, Calendar, ChevronRight } from 'lucide-react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { router } from 'expo-router';
+import * as Sharing from 'expo-sharing';
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
 
 interface Analysis {
   id: string;
@@ -29,28 +42,45 @@ interface Analysis {
 }
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
+<<<<<<< HEAD
 const ICON_STROKE_WIDTH = 2.5;
 const DELETE_AREA_WIDTH = 120;
 const SWIPE_THRESHOLD = -40; 
+=======
+const SWIPE_THRESHOLD = -100;
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
 
 export default function HistoryScreen() {
   const [analyses, setAnalyses] = useState<Analysis[]>([]);
   const [filter, setFilter] = useState<'all' | 'favorites'>('all');
 
+<<<<<<< HEAD
+=======
+  useEffect(() => {
+    loadAnalyses();
+  }, []);
+
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   const loadAnalyses = async () => {
     try {
       const stored = await AsyncStorage.getItem('plant_analyses');
       if (stored) {
+<<<<<<< HEAD
         const parsedAnalyses: Analysis[] = JSON.parse(stored);
         setAnalyses(parsedAnalyses.sort((a, b) => b.timestamp - a.timestamp));
       } else {
         setAnalyses([]);
+=======
+        const parsedAnalyses = JSON.parse(stored);
+        setAnalyses(parsedAnalyses.sort((a: Analysis, b: Analysis) => b.timestamp - a.timestamp));
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
       }
     } catch (error) {
       console.error('Error loading analyses:', error);
     }
   };
 
+<<<<<<< HEAD
   // ✅ Recarrega a lista toda vez que a tela do Histórico é focada
   useFocusEffect(
     useCallback(() => {
@@ -58,6 +88,8 @@ export default function HistoryScreen() {
     }, [])
   );
 
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   const toggleFavorite = async (id: string) => {
     try {
       const updatedAnalyses = analyses.map(analysis =>
@@ -75,7 +107,11 @@ export default function HistoryScreen() {
   const deleteAnalysis = async (id: string) => {
     Alert.alert(
       'Excluir Análise',
+<<<<<<< HEAD
       'Tem certeza que deseja excluir esta análise?',
+=======
+      'Tem certeza que deseja excluir esta análise? Esta ação não pode ser desfeita.',
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
       [
         { text: 'Cancelar', style: 'cancel' },
         {
@@ -95,6 +131,7 @@ export default function HistoryScreen() {
     );
   };
 
+<<<<<<< HEAD
   const clearAllHistory = () => {
     Alert.alert(
       'Limpar Histórico',
@@ -128,6 +165,14 @@ export default function HistoryScreen() {
     } catch (error) {
       console.error('Error sharing analysis:', error);
       Alert.alert('Erro', 'Não foi possível compartilhar a análise.');
+=======
+  const shareAnalysis = async (analysis: Analysis) => {
+    try {
+      const shareContent = `Análise de Planta - PlantAI\n\n${analysis.result}`;
+      await Sharing.shareAsync('data:text/plain;base64,' + btoa(shareContent));
+    } catch (error) {
+      console.error('Error sharing analysis:', error);
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
     }
   };
 
@@ -140,9 +185,15 @@ export default function HistoryScreen() {
 
     if (diffInHours < 1) {
       const diffInMins = Math.floor(diffInMs / (1000 * 60));
+<<<<<<< HEAD
       return diffInMins <= 1 ? 'Agora' : `${diffInMins} min atrás`;
     } else if (diffInHours < 24) {
       return `${diffInHours}h atrás`;
+=======
+      return diffInMins <= 1 ? 'Agora' : `${diffInMins} minutos atrás`;
+    } else if (diffInHours < 24) {
+      return `${diffInHours} ${diffInHours === 1 ? 'hora' : 'horas'} atrás`;
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
     } else if (diffInDays === 1) {
       return 'Ontem';
     } else if (diffInDays < 7) {
@@ -168,6 +219,10 @@ export default function HistoryScreen() {
         pathname: '/result',
         params: {
           imageData: item.imageData,
+<<<<<<< HEAD
+=======
+          imageUri: item.imageUri,
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
           result: item.result,
           timestamp: item.timestamp.toString()
         }
@@ -182,6 +237,7 @@ export default function HistoryScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
+<<<<<<< HEAD
         <View style={styles.headerTop}>
             <View>
               <Text style={styles.headerTitle}>Histórico</Text>
@@ -195,6 +251,13 @@ export default function HistoryScreen() {
                 <Text style={styles.clearButtonText}>Limpar</Text>
               </TouchableOpacity>
             )}
+=======
+        <View>
+          <Text style={styles.headerTitle}>Histórico</Text>
+          <Text style={styles.headerSubtitle}>
+            {analyses.length} {analyses.length === 1 ? 'análise' : 'análises'}
+          </Text>
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
         </View>
         <View style={styles.filterButtons}>
           <TouchableOpacity
@@ -211,9 +274,14 @@ export default function HistoryScreen() {
           >
             <Heart
               size={16}
+<<<<<<< HEAD
               color={filter === 'favorites' ? '#ffffff' : '#ef4444'}
               fill={filter === 'favorites' ? '#ffffff' : 'none'}
               strokeWidth={ICON_STROKE_WIDTH}
+=======
+              color={filter === 'favorites' ? '#ffffff' : '#6b7280'}
+              fill={filter === 'favorites' ? '#ffffff' : 'none'}
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
             />
             <Text style={[styles.filterButtonText, filter === 'favorites' && styles.filterButtonTextActive]}>
               Favoritas
@@ -225,15 +293,24 @@ export default function HistoryScreen() {
       {filteredAnalyses.length === 0 ? (
         <View style={styles.emptyState}>
           <View style={styles.emptyStateIconContainer}>
+<<<<<<< HEAD
             <Calendar size={64} color="#d1d5db" strokeWidth={ICON_STROKE_WIDTH} />
+=======
+            <Calendar size={64} color="#d1d5db" />
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
           </View>
           <Text style={styles.emptyStateTitle}>
             {filter === 'favorites' ? 'Nenhuma análise favorita' : 'Nenhuma análise ainda'}
           </Text>
           <Text style={styles.emptyStateSubtitle}>
             {filter === 'favorites'
+<<<<<<< HEAD
               ? 'Marque suas análises favoritas para vê-las aqui.'
               : 'Comece analisando uma planta na aba principal.'
+=======
+              ? 'Marque suas análises favoritas para vê-las aqui'
+              : 'Comece analisando uma planta na aba principal'
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
             }
           </Text>
         </View>
@@ -271,6 +348,7 @@ function AnimatedAnalysisItem({
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const scaleAnim = useRef(new Animated.Value(0.9)).current;
 
+<<<<<<< HEAD
   // 🚨 IMPLEMENTAÇÃO DO SWIPE-TO-DELETE COM PANRESPONDER
   const panResponder = useRef(
     PanResponder.create({
@@ -308,6 +386,8 @@ function AnimatedAnalysisItem({
   ).current;
 
   // Animação de entrada
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   useEffect(() => {
     Animated.parallel([
       Animated.timing(fadeAnim, {
@@ -331,11 +411,14 @@ function AnimatedAnalysisItem({
     : item.imageUri;
 
   const getExcerpt = (text: string) => {
+<<<<<<< HEAD
     const problemMatch = text.match(/Principal Problema Identificado:\s*\[([^\]]+)\]/i);
     if (problemMatch && problemMatch[1]) {
         return `Problema: ${problemMatch[1].trim()}`;
     }
     
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
     const lines = text.split('\n').filter(line => line.trim() && !line.startsWith('#'));
     const firstLine = lines[0] || '';
     return firstLine.length > 80 ? firstLine.substring(0, 80) + '...' : firstLine;
@@ -351,6 +434,7 @@ function AnimatedAnalysisItem({
         },
       ]}
     >
+<<<<<<< HEAD
       {/* ⚠️ Fundo de Deslize Fixo: Contém o botão Excluir */}
       <View style={styles.swipeBackground}>
         <TouchableOpacity
@@ -373,6 +457,20 @@ function AnimatedAnalysisItem({
         style={[styles.analysisItem, { transform: [{ translateX }] }]}
         {...panResponder.panHandlers} // Aplica os manipuladores de gesto
       >
+=======
+      <View style={styles.deleteButtonContainer}>
+        <TouchableOpacity
+          style={styles.deleteButton}
+          onPress={onDelete}
+          activeOpacity={0.7}
+        >
+          <Trash2 size={20} color="#ffffff" />
+          <Text style={styles.deleteButtonText}>Excluir</Text>
+        </TouchableOpacity>
+      </View>
+
+      <Animated.View style={[styles.analysisItem, { transform: [{ translateX }] }]}>
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
         <TouchableOpacity
           style={styles.itemContent}
           onPress={onPress}
@@ -382,7 +480,11 @@ function AnimatedAnalysisItem({
             <Image source={{ uri: imageUri }} style={styles.analysisImage} />
             {item.isFavorite && (
               <View style={styles.favoriteBadge}>
+<<<<<<< HEAD
                 <Heart size={12} color="#ffffff" fill="#ffffff" strokeWidth={ICON_STROKE_WIDTH} />
+=======
+                <Heart size={12} color="#ffffff" fill="#ffffff" />
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
               </View>
             )}
           </View>
@@ -390,7 +492,11 @@ function AnimatedAnalysisItem({
           <View style={styles.analysisContent}>
             <View style={styles.analysisHeader}>
               <Text style={styles.analysisDate}>{formatDate(item.timestamp)}</Text>
+<<<<<<< HEAD
               <ChevronRight size={20} color="#9ca3af" strokeWidth={ICON_STROKE_WIDTH} />
+=======
+              <ChevronRight size={20} color="#9ca3af" />
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
             </View>
             <Text style={styles.analysisPreview} numberOfLines={2}>
               {getExcerpt(item.result)}
@@ -405,7 +511,10 @@ function AnimatedAnalysisItem({
                   size={18}
                   color={item.isFavorite ? '#ef4444' : '#9ca3af'}
                   fill={item.isFavorite ? '#ef4444' : 'none'}
+<<<<<<< HEAD
                   strokeWidth={ICON_STROKE_WIDTH}
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
                 />
               </TouchableOpacity>
               <TouchableOpacity
@@ -413,7 +522,11 @@ function AnimatedAnalysisItem({
                 style={styles.footerButton}
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
               >
+<<<<<<< HEAD
                 <Share size={18} color="#9ca3af" strokeWidth={ICON_STROKE_WIDTH} />
+=======
+                <Share size={18} color="#9ca3af" />
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
               </TouchableOpacity>
             </View>
           </View>
@@ -429,19 +542,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8fafc',
   },
   header: {
+<<<<<<< HEAD
     paddingHorizontal: 24,
     paddingTop: 24,
+=======
+    padding: 24,
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
     paddingBottom: 16,
     backgroundColor: '#ffffff',
     borderBottomWidth: 1,
     borderBottomColor: '#f1f5f9',
   },
+<<<<<<< HEAD
   headerTop: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 16,
   },
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   headerTitle: {
     fontSize: 32,
     fontWeight: 'bold',
@@ -451,6 +571,7 @@ const styles = StyleSheet.create({
   headerSubtitle: {
     fontSize: 14,
     color: '#6b7280',
+<<<<<<< HEAD
   },
   clearButton: {
     flexDirection: 'row',
@@ -464,6 +585,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
     color: '#ef4444',
+=======
+    marginBottom: 16,
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   },
   filterButtons: {
     flexDirection: 'row',
@@ -495,6 +619,7 @@ const styles = StyleSheet.create({
   animatedContainer: {
     marginBottom: 12,
   },
+<<<<<<< HEAD
   // 🚀 ESTILOS PARA O SWIPE-TO-DELETE
   swipeBackground: {
     position: 'absolute',
@@ -531,6 +656,37 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   // -----------------------------------
+=======
+  deleteButtonContainer: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    paddingRight: 16,
+    width: 120,
+  },
+  deleteButton: {
+    backgroundColor: '#ef4444',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    shadowColor: '#ef4444',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  deleteButtonText: {
+    color: '#ffffff',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   analysisItem: {
     backgroundColor: '#ffffff',
     borderRadius: 16,
@@ -540,7 +696,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 12,
     elevation: 3,
+<<<<<<< HEAD
     zIndex: 2,
+=======
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
   },
   itemContent: {
     flexDirection: 'row',
@@ -586,7 +745,11 @@ const styles = StyleSheet.create({
   },
   analysisPreview: {
     fontSize: 14,
+<<<<<<< HEAD
     color: '#374151',
+=======
+    color: '#6b7280',
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
     lineHeight: 20,
     marginBottom: 8,
   },
@@ -626,4 +789,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 24,
   },
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 730445b6c4c45fb217237a6ee7814ffb0094457e
